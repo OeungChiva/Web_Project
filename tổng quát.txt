@@ -1,4 +1,3 @@
 Nhập file SQL 
-Quan lý cua tụi em thầy vào admincp ạ
 tai khoan :admin@gmail.com
 matkhau :123
