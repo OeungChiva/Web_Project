@@ -20,7 +20,8 @@ if(isset($_GET['code'])){
         $doanhthu = 0;
         while($row = mysqli_fetch_array($query_lietke_dh)){
               $soluongmua+=$row['soluongmua'];
-              $doanhthu+=$row['giasanpham'];
+              $thanhtien=$row['giasanpham'] * $row['soluongmua'];
+              $doanhthu+=$thanhtien;
         }
         if(mysqli_num_rows($query_thongke)==0){
                 $soluongban = $soluongmua;
@@ -29,7 +30,7 @@ if(isset($_GET['code'])){
                 $sql_update_thongke = mysqli_query($connect,"INSERT INTO tbl_thongke (ngaydat,donhang,doanhthu,soluongban) VALUE('$now','$donhang','$doanhthu','$soluongban')" );
         }elseif(mysqli_num_rows($query_thongke)!=0){
             while($row_tk = mysqli_fetch_array($query_thongke)){
-                $soluongban = $row_tk['soluongban']+$soluongban;
+                $soluongban = $row_tk['soluongban']+$soluongmua;
                 $doanhthu = $row_tk['doanhthu']+$doanhthu;
                 $donhang = $row_tk['donhang']+1;
                 $sql_update_thongke = mysqli_query($connect,"UPDATE tbl_thongke SET soluongban='$soluongban',doanhthu='$doanhthu',donhang='$donhang' WHERE ngaydat='$now'" );
